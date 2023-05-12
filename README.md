@@ -5,6 +5,7 @@
 ```c++
 #include"common/tt_test.h"
 
+JUST_RUN_TEST(demo, test)
 TEST(demo, test)
 {
     ASSERT_TRUE(1 == 1);
@@ -12,8 +13,7 @@ TEST(demo, test)
     ASSERT_EQ(1, 1);
 }
 
-// 打开只运行demo test2测试文件, 若关闭则所有测试文件全部运行
-JUST_RUN_TEST(demo, test1)
+DONT_RUN_TEST(demo, test1)
 TEST(demo, test1)
 {
     int *p = nullptr;
@@ -23,4 +23,4 @@ TEST(demo, test1)
 
 ### 输出结果
 
-[![p9sb676.png](https://s1.ax1x.com/2023/05/12/p9sb676.png)](https://imgse.com/i/p9sb676)
+[![p9yVUqx.png](https://s1.ax1x.com/2023/05/12/p9yVUqx.png)](https://imgse.com/i/p9yVUqx)

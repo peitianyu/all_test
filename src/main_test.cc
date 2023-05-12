@@ -5,5 +5,5 @@ int main()
 {
     REGISTER_SEGFAULT_HANDLER
     
-    return RunAllTests();
+    return RUN_ALL_TESTS();
 }
