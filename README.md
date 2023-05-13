@@ -13,8 +13,13 @@ TEST(demo, test)
     ASSERT_EQ(1, 1);
 }
 
+<<<<<<< HEAD
 DONT_TEST(demo, test1)
 // TEST(demo, test1)
+=======
+DONT_RUN_TEST(demo, test1)
+TEST(demo, test1)
+>>>>>>> 20b5510311423706ac098b38099765a0971eb467
 {
     int *p = nullptr;
     *p = 1;
@@ -23,4 +28,4 @@ DONT_TEST(demo, test1)
 
 ### 输出结果
 
-[![p9sb676.png](https://s1.ax1x.com/2023/05/12/p9sb676.png)](https://imgse.com/i/p9sb676)
+[![p9yVUqx.png](https://s1.ax1x.com/2023/05/12/p9yVUqx.png)](https://imgse.com/i/p9yVUqx)

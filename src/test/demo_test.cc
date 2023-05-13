@@ -8,7 +8,7 @@ TEST(demo, test)
     ASSERT_EQ(1, 1);
 }
 
-DONT_TEST(demo, test1)
+SKIP_TEST(demo, test1)
 // TEST(demo, test1)
 {
     int *p = nullptr;
