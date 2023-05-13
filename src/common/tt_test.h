@@ -101,7 +101,7 @@ private:
 	};                                                											\
 	base##name##_Test g_##base##name##_Test;          											\
 	void base##name##_Test::Run()
-
+#define DONT_TEST(base, name) void base##name##_Test()
 #define RunAllTests() RegisterTest::GetInstance()->RunAllTests()
 #else
 #define TEST(base, name) void base##name##_Test()
