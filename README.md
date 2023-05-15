@@ -5,7 +5,7 @@
 ```c++
 #include"common/tt_test.h"
 
-JUST_RUN_TEST(demo, test)
+// JUST_RUN_TEST(demo, test)
 TEST(demo, test)
 {
     ASSERT_TRUE(1 == 1);
@@ -13,16 +13,17 @@ TEST(demo, test)
     ASSERT_EQ(1, 1);
 }
 
-<<<<<<< HEAD
-DONT_TEST(demo, test1)
+
+SKIP_TEST(demo, test1)
 // TEST(demo, test1)
-=======
-DONT_RUN_TEST(demo, test1)
-TEST(demo, test1)
->>>>>>> 20b5510311423706ac098b38099765a0971eb467
 {
     int *p = nullptr;
     *p = 1;
+}
+
+TEST(demo, test2)
+{
+    ASSERT_EQ(1, 2);
 }
 ```
 

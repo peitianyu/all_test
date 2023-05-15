@@ -8,9 +8,15 @@ TEST(demo, test)
     ASSERT_EQ(1, 1);
 }
 
+
 SKIP_TEST(demo, test1)
 // TEST(demo, test1)
 {
     int *p = nullptr;
     *p = 1;
+}
+
+TEST(demo, test2)
+{
+    ASSERT_EQ(1, 2);
 }
