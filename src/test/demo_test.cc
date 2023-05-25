@@ -1,4 +1,4 @@
-#include"common/tt_test.h"
+#include"core/tt_test.h"
 
 // JUST_RUN_TEST(demo, test)
 TEST(demo, test)
@@ -16,7 +16,14 @@ SKIP_TEST(demo, test1)
     *p = 1;
 }
 
+// JUST_RUN_TEST(demo, test2)
 TEST(demo, test2)
 {
-    ASSERT_EQ(1, 2);
+    bool is_false = false;
+    ASSERT_TRUE(is_false);
+    ASSERT_FALSE(!is_false);
+
+    int a = 1;
+    int b = 2;
+    ASSERT_EQ(a, b);
 }

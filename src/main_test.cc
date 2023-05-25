@@ -1,5 +1,5 @@
-#include"common/tt_test.h"
-#include"common/tt_backtrace.h"
+#include"core/tt_test.h"
+#include"core/tt_backtrace.h"
 
 int main()
 {

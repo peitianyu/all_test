@@ -30,3 +30,9 @@ TEST(demo, test2)
 ### 输出结果
 
 [![p9yVUqx.png](https://s1.ax1x.com/2023/05/12/p9yVUqx.png)](https://imgse.com/i/p9yVUqx)
+
+### !注意
+
+```txt
+1. 使用多个JUST_RUN_TEST时会编译不通过, 会报: multiple definition of `g_justtest_Test'
+```
