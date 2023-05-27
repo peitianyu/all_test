@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <Eigen/Core>
+#include "core/tt_assert.h"
 
 using Point3D = Eigen::Vector3d;
 
@@ -27,15 +28,14 @@ public:
             delete children_[i];
     }
 
-    void Insert(Point3D* p)
+    void Insert(const Point3D& p)
     {
-        // 断言p在八叉树的范围内
-        assert(IsInBoundary(*p));
+        tt_assert(IsInBoundary(p));
 
         if (IsLeaf())
         {
             if(data_ == nullptr){
-                data_ = p;
+                data_ = new Point3D(p);
                 return;
             }else{
                 Point3D* old_data = data_;
@@ -48,11 +48,11 @@ public:
                     new_center.z() += half_dimension_.z() * (i & 1 ? .5f : -.5f);
                     children_[i] = new Octree(new_center, half_dimension_ * .5f);
                 }
-                children_[GetOctant(*old_data)]->Insert(old_data);
-                children_[GetOctant(*p)]->Insert(p);
+                children_[GetOctant(*old_data)]->Insert(*old_data);
+                children_[GetOctant(p)]->Insert(p);
             }
         }else{
-            children_[GetOctant(*p)]->Insert(p);
+            children_[GetOctant(p)]->Insert(p);
         }
     }
     std::vector<Point3D> GetPointsInsideSphere(const Point3D& center, double radius) const

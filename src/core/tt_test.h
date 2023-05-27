@@ -27,6 +27,16 @@ struct Tester
 #define ASSERT_GE(a, b) Tester(__FILE__, __LINE__).Is((a) >= (b), #a " >= " #b)
 
 
+#define EXPECT_TRUE(x) Tester(__FILE__, __LINE__).Is((x), #x)
+#define EXPECT_FALSE(x) Tester(__FILE__, __LINE__).Is(!(x), #x)
+#define EXPECT_EQ(a, b) Tester(__FILE__, __LINE__).Is((a) == (b), #a " == " #b)
+#define EXPECT_NE(a, b) Tester(__FILE__, __LINE__).Is((a) != (b), #a " != " #b)
+#define EXPECT_LT(a, b) Tester(__FILE__, __LINE__).Is((a) < (b), #a " < " #b)
+#define EXPECT_LE(a, b) Tester(__FILE__, __LINE__).Is((a) <= (b), #a " <= " #b)
+#define EXPECT_GT(a, b) Tester(__FILE__, __LINE__).Is((a) > (b), #a " > " #b)
+#define EXPECT_GE(a, b) Tester(__FILE__, __LINE__).Is((a) >= (b), #a " >= " #b)
+
+
 class RegisterTest
 {
 public:
