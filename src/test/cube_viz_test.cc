@@ -11,6 +11,6 @@ TEST(cube_viz, cube_viz_test)
     
     float prob = 0.5;
     viz.showWidget("Cube Widget", cv::viz::WCube(cv::Point3f(0.5, 0.5, 0.0), cv::Point3f(0.0, 0.0, -0.5), false, cv::viz::Color(0, uint(255 * (1 - prob)), 0)));
-   
+    
     viz.spin();
 }

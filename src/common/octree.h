@@ -112,7 +112,4 @@ private:
     Point3D* data_;
 };
 
-
-
-
 #endif // __OCTREE_H__

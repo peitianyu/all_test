@@ -7,7 +7,7 @@ Point3D GetRandomPoint()
     return Point3D::Random();
 }
 
-JUST_RUN_TEST(octree, test)
+// JUST_RUN_TEST(octree, test)
 TEST(octree, test)
 {
     Octree octree(Point3D::Zero(), Point3D(1, 1, 1));
