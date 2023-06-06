@@ -17,7 +17,7 @@ struct Point
     }
 };
 
-JUST_RUN_TEST(dbg, test)
+// JUST_RUN_TEST(dbg, test)
 TEST(dbg, test)
 {
     std::string msg = "hello world";
