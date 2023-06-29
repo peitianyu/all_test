@@ -122,7 +122,6 @@ void TestSlideWindow1()
     std::cout << "Hrr = \n" << Hrr << std::endl;
     std::cout << "br = \n" << br.transpose() << std::endl;
 
-
     // 结果对比
     std::cout << "-----------------------------" << std::endl;
     Eigen::Matrix<double, 6, 1> x = H.inverse() * b;
@@ -142,7 +141,7 @@ void TestDbg()
     dbg(H);
 }
 
-JUST_RUN_TEST(slide_window, test)
+// JUST_RUN_TEST(slide_window, test)
 TEST(slide_window, test)
 {
     TestSlideWindow();
