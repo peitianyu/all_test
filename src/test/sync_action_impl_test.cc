@@ -42,7 +42,7 @@ private:
     float m_b;
 };
 
-JUST_RUN_TEST(sync_action_impl, test)
+// JUST_RUN_TEST(sync_action_impl, test)
 TEST(sync_action_impl, test)
 {
     uint a = 1;
