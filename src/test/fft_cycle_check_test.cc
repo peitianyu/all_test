@@ -60,7 +60,7 @@ bool isCycle(vector<int>& arr1, vector<int>& arr2) {
   return true;
 }
 
-JUST_RUN_TEST(fft_cycle_check, test)
+// JUST_RUN_TEST(fft_cycle_check, test)
 TEST(fft_cycle_check, test)
 {
     std::vector<int> arr1 = {1, 2, 3, 4, 5};
