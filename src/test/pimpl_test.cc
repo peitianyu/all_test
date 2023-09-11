@@ -2,8 +2,7 @@
 #include <iostream>
 #include <memory>
 
-class PimplTest
-{
+class PimplTest {
 public:
     PimplTest() : pimpl_(std::make_unique<Pimpl>()) {}
 
@@ -13,19 +12,12 @@ private:
     std::unique_ptr<Pimpl> pimpl_;
 };
 
-class PimplTest::Pimpl
-{
+class PimplTest::Pimpl {
 public:
-    void DoSomething()
-    {
-        printf("DoSomething\n");
-    }
+    void DoSomething() { printf("DoSomething\n"); }
 };
 
-void PimplTest::DoSomething()
-{
-    pimpl_->DoSomething();
-}
+void PimplTest::DoSomething() { pimpl_->DoSomething(); }
 
 // JUST_RUN_TEST(pimpl, test)
 TEST(pimpl, test)

@@ -2,7 +2,7 @@
 #include "common/b_spline.h"
 #include <opencv2/viz.hpp>
 
-JUST_RUN_TEST(b_spline, test)
+// JUST_RUN_TEST(b_spline, test)
 TEST(b_spline, test)
 {
     BSpline<Eigen::Vector3f, float> bspline;

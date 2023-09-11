@@ -24,6 +24,9 @@ INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
 find_package(OpenCV REQUIRED)
 INCLUDE_DIRECTORIES(${OpenCV_INCLUDE_DIRS})
 
+# 添加openMP库
+find_package(OpenMP REQUIRED)
+
 # 添加.h文件
 include_directories(src)
 
@@ -32,4 +35,4 @@ file(GLOB_RECURSE ALL_LIBRIRY_SRCS "src/*.c*")
 
 # 执行文件
 add_executable(${PROJECT_NAME} ${ALL_LIBRIRY_SRCS})
-target_link_libraries(${PROJECT_NAME} ${EIGEN3_LIBRARY} ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX ${EIGEN3_LIBRARY} ${OpenCV_LIBS})
