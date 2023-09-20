@@ -29,3 +29,11 @@ TEST(print1, test)
 {
     print(std::cout, 1, 2, 3, "4", 5, 6.5, 7, 8, 9) << std::endl;
 }
+
+
+// JUST_RUN_TEST(print2, test)
+TEST(print2, test)
+{
+    float f = 1.f;
+    printf("%f\n", f);
+}

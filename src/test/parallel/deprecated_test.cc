@@ -1,5 +1,5 @@
-#include"../core/tt_test.h"
-#include"../common/deprecated.h"
+#include"core/tt_test.h"
+#include"common/deprecated.h"
 
 DEPRECATED("已弃用")
 void deprecated_func()

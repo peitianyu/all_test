@@ -23,3 +23,4 @@ TEST(attribute, test_constructor)
 
     test_section();
 }
+

@@ -2,7 +2,7 @@
 #include "common/timer.h"
 #include "core/tt_tictoc.h"
 
-JUST_RUN_TEST(timer, test)
+// JUST_RUN_TEST(timer, test)
 TEST(timer, test)
 {
     TicToc tic_toc;
