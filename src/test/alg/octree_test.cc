@@ -2,7 +2,7 @@
 #include "core/tt_assert.h"
 
 
-JUST_RUN_TEST(octree, test)
+// JUST_RUN_TEST(octree, test)
 TEST(octree, test)
 {
 
