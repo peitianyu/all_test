@@ -10,10 +10,24 @@ public:
         plot_ = std::make_unique<signalsmith::plot::Plot2D>(width, height);
     }
 
+    signalsmith::plot::Line2D& line(uint mode = 0) {
+        return plot_->line(mode);
+    }
+
     signalsmith::plot::Line2D& draw_line(double x, double y, double x_end, double y_end, uint mode) {
         auto& line = plot_->line(mode);
         line.add(x, y);
         line.add(x_end, y_end);
+
+        return line;
+    }
+
+    signalsmith::plot::Line2D& draw_rect(signalsmith::plot::Line2D& line, double x, double y, double width, double height) {
+        line.add(x, y);
+        line.add(x + width, y);
+        line.add(x + width, y + height);
+        line.add(x, y + height);
+        line.add(x, y);
 
         return line;
     }
@@ -41,6 +55,16 @@ public:
         return line;
     }
 
+    void draw_grid(uint scale, uint mode) {
+        double width = plot_->x.drawMax() - plot_->x.drawMin();
+        double height = plot_->y.drawMax() - plot_->y.drawMin();
+
+        for (double i = 0; i < width; i += scale) 
+            draw_line(i, 0, i, height, mode);
+        for (double i = 0; i < height; i += scale) 
+            draw_line(0, i, width, i, mode);
+    }
+
     signalsmith::plot::Line2D& draw_marker(signalsmith::plot::Line2D& line, const double& x, const double& y) {
         line.marker(x, y);
         return line;
@@ -52,7 +76,7 @@ public:
         }
         return line;
     }
-
+    
     void show_legend(signalsmith::plot::Line2D& line, const std::string& str, double x, double y) {
         plot_->legend(x, y).add(line, str);
     }

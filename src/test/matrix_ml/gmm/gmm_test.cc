@@ -98,6 +98,8 @@ static Eigen::MatrixXf load_data(const std::string& data_path)
         X(i / 2, 0) = data[i];
         X(i / 2, 1) = data[i + 1];
     }
+
+    fin.close();
     return X;
 }
 

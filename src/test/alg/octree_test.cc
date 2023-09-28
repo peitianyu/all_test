@@ -44,6 +44,7 @@ TEST(octree, test)
             // datas.push_back(data);
         }
     }
+    ifs.close();
 
     ///////////////////////construct//////////////////////////
     Quad quadtree(min, max, 4);
