@@ -45,7 +45,7 @@ TEST(plot2d, circles)
     plot.write("filled-circles.svg");
 }
 
-JUST_RUN_TEST(plot2d, styles)
+// JUST_RUN_TEST(plot2d, styles)
 TEST(plot2d, styles)
 {
     signalsmith::plot::Plot2D plot(100, 100);
@@ -63,4 +63,28 @@ TEST(plot2d, styles)
     
     // Remove bottom ticks
     plot.write("style-sequence.svg");
+}
+
+static void draw_rec(double x_min, double x_max, double y_min, double y_max, signalsmith::plot::Plot2D &plot)
+{
+    std::vector<double> x = {x_min, x_max, x_max, x_min, x_min};
+    std::vector<double> y = {y_min, y_min, y_max, y_max, y_min};
+    auto &line = plot.line();
+    line.addArray(x, y);
+}
+
+
+// JUST_RUN_TEST(plot2d, rec)
+TEST(plot2d, rec)
+{
+    // 绘制矩形(0.0, 0.0)(50, 50)
+    signalsmith::plot::Plot2D plot(100, 100);
+    draw_rec(0, 50, 0, 50, plot);
+
+    // 绘制矩形(10.0, 10.0)(30, 30)
+    draw_rec(10, 30, 10, 30, plot);
+
+    // 绘制矩形(20.0, 20.0)(40, 40)
+    draw_rec(20, 40, 20, 40, plot);
+    plot.write("rec.svg");
 }

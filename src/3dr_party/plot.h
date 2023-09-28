@@ -38,13 +38,13 @@ static double estimateUtf8Width(const char *utf8Str);
 class PlotStyle {
 public:
 	double padding = 10;
-	double lineWidth = 1.5, precision = 100;
+	double lineWidth = 0.6, precision = 100;
 	double markerSize = 3.25;
-	double tickH = 4, tickV = 4;
+	double tickH = 0, tickV = 0;
 	// Text
-	double labelSize = 12, valueSize = 10;
+	double labelSize = 6, valueSize = 10;
 	double fontAspectRatio = 1; ///< scales size estimates, if using a particularly wide font
-	double textPadding = 5, lineHeight = 1.2;
+	double textPadding = 2, lineHeight = 1.2;
 	// Fills
 	double fillOpacity = 0.3;
 	double hatchWidth = 1, hatchSpacing = 3;
@@ -53,16 +53,17 @@ public:
 	std::string scriptHref = "", scriptSrc = "";
 	std::string cssPrefix = "", cssSuffix = "";
 	std::vector<std::string> colours = {"#0073E6", "#CC0000", "#00B300", "#806600", "#E69900", "#CC00CC"};
-	std::vector<std::vector<double>> dashes = {{}, {1.2, 1.2}, {2.8, 1.6}, {5, 4}, {4, 1, 1, 1, 1, 1}, {10, 3}, {4, 2, 1, 2}};
+	std::vector<std::vector<double>> dashes = {{}};
+	// std::vector<std::vector<double>> dashes = {{}, {1.2, 1.2}, {2.8, 1.6}, {5, 4}, {4, 1, 1, 1, 1, 1}, {10, 3}, {4, 2, 1, 2}};
 	/// SVG literals for the markers.  These should be centered on `(0, 0)` and look correct next to a filled circle of radius 1.  They will be given both a stroke and fill-class, so they should specify `fill="none"`/`stroke="none"` if fill/stroke is not wanted.
 	std::vector<std::string> markers = {
-		"<rect x=\"-0.9\" y=\"-0.9\" width=\"1.8\" height=\"1.8\" stroke=\"none\"/>",
-		"<circle cx=\"0\" cy=\"0\" r=\"1\" stroke=\"none\"/>",
-		"<path d=\"M0 0.9 -0.9 0 0 -0.9 0.9 0Z\" fill=\"#FFFA\" stroke-linejoin=\"miter\" stroke-width=\"0.6\"/>",
-		"<path fill=\"none\" d=\"M0 -1.2 0 1.2 M -1.2 0 1.2 0\" stroke-width=\"0.7\"/>",
-		"<circle cx=\"0\" cy=\"0\" fill=\"#FFFA\" r=\"0.8\" stroke-width=\"0.65\"/>",
+		"<circle cx=\"0\" cy=\"0\" r=\"0.3\" stroke=\"none\"/>",
+		"<path fill=\"none\" d=\"M-0.2 -0.2 0.2 0.2 M -0.2 0.2 0.2 -0.2\" stroke-width=\"0.2\"/>",
+		"<path d=\"M0 0.3 -0.3 0 0 -0.3 0.3 0Z\" fill=\"#FFFA\" stroke-linejoin=\"miter\" stroke-width=\"0.2\"/>",
+		"<path fill=\"none\" d=\"M0 -0.3 0 0.3 M -0.3 0 0.3 0\" stroke-width=\"0.2\"/>",
+		"<circle cx=\"0\" cy=\"0\" fill=\"#FFFA\" r=\"0.3\" stroke-width=\"0.65\"/>",
 		"<path stroke=\"none\" d=\"M0 -1.25 1.25 0.9 -1.25 0.9Z\"/>",
-		"<path fill=\"none\" d=\"M-0.9 -0.9 0.9 0.9 M -0.9 0.9 0.9 -0.9\" stroke-width=\"0.65\"/>",
+		
 		// spares:
 	};
 
