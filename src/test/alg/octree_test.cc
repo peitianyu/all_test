@@ -12,7 +12,7 @@ using Quad = QuadTree<Point, double>;
 
 static void draw_rec(double x_min, double x_max, double y_min, double y_max, signalsmith::plot::Plot2D &plot, Quad::Node *node);
 
-JUST_RUN_TEST(octree, test)
+// JUST_RUN_TEST(octree, test)
 TEST(octree, test)
 {
     std::string data_path = "../src/data/quadtree.txt";
