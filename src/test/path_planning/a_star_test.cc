@@ -3,7 +3,7 @@
 #include "3dr_party/plot_manage.h"
 
 
-JUST_RUN_TEST(a_star, test)
+// JUST_RUN_TEST(a_star, test)
 TEST(a_star, test)
 {
     path_plan::Astar astar("../src/data/a_star.grid");
