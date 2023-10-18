@@ -10,6 +10,10 @@ public:
         plot_ = std::make_unique<signalsmith::plot::Plot2D>(width, height);
     }
 
+    void reset(size_t width, size_t height) {
+        plot_ = std::make_unique<signalsmith::plot::Plot2D>(width, height);
+    }
+
     signalsmith::plot::Line2D& line(uint mode = 0) {
         return plot_->line(mode);
     }

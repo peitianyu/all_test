@@ -46,6 +46,6 @@ TEST(a_star, test)
     for(uint i = 0; i < path.size(); ++i) 
         plot.draw_rect(line, path[i].x*scale, path[i].y*scale, scale, scale).drawFill().toFrame(0.5*i);
 
-    plot.show_legend(line, "label", 2, 1);
+    plot.show_legend(line, "astar", 2, 1);
     plot.write("a_star.svg");
 }

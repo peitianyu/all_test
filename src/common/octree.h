@@ -95,6 +95,16 @@ public:
     }
 
     /**
+     * @brief 	 [简介] reset函数
+     */
+    void reset()
+    {
+        delete root_;
+        root_ = new Node(boundary_.center(), DataType(), 0);
+    }
+    
+
+    /**
      * @brief 	 [简介] 用于插入点
      * @param 	 pos [in], 点位置 
      * @param 	 data [in], 所带数据
@@ -110,17 +120,12 @@ public:
     /**
      * @brief 	 [简介] 用于查找点
      * @param 	 pos [in], 点位置 
-     * @return 	 [Node*], 返回节点指针
-     */
-    Node *find(const PosType& pos) { return find(pos, max_depth_); }
-
-    /**
-     * @brief 	 [简介] 用于查找点
-     * @param 	 pos [in], 点位置 
      * @param 	 depth [in], 查找深度
      * @return 	 [Node*], 返回节点指针
      */
-    Node *find(const PosType& pos, const size_t& depth) { return find(root_, pos, depth); }
+    Node *find(const PosType& pos, const int& depth = -1) { 
+        return depth == -1 ? find(root_, pos, max_depth_) : find(root_, pos, depth); 
+    }
 
     /**
      * @brief 	 [简介] 找到节点的边界
@@ -132,6 +137,18 @@ public:
         PosType half_size = boundary_.size() / (1 << (node->depth + 1));
         boundary.min = node->center - half_size;
         boundary.max = node->center + half_size;
+    }
+
+    /**
+     * @brief 	 [简介] 删除节点
+     * @param    pos [in], 点位置
+     * @param    depth [in], 删除深度
+     */
+    void remove(const PosType& pos, const size_t& depth)
+    {
+        if(depth == 0) reset();
+
+        remove(root_, pos, depth);
     }
 
     /**
@@ -206,6 +223,25 @@ protected:
         if (node->childs[index] == nullptr) return node;
 
         return find(node->childs[index], pos, depth);
+    }
+
+    /**
+     * @brief 	 [简介] erase方法
+     * @param 	 node [in], 删除节点
+     * @param 	 pos [in], 删除点位置
+     * @param 	 depth [in], 删除深度
+     */
+    void remove(Node *node, const PosType& pos, const size_t& depth)
+    {
+        size_t index = find_index(pos, node);
+        if (node->childs[index] == nullptr)     return;
+
+        if (node->childs[index]->depth == depth) {
+            delete node->childs[index];
+            node->childs[index] = nullptr;
+            return;
+        }
+        remove(node->childs[index], pos, depth);
     }
 private:
     /**
