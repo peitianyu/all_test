@@ -1,38 +1,55 @@
-## 测试单元模板, 实现TEST与段错误检测
+# 日常学习
 
-### 测试在src/test中新建test文件, 例如src/test/demo_test.cc
-
-```c++
-#include"common/tt_test.h"
-
-// JUST_RUN_TEST(demo, test)
-TEST(demo, test)
-{
-    ASSERT_TRUE(1 == 1);
-    ASSERT_FALSE(1 == 2);
-    ASSERT_EQ(1, 1);
-}
-
-
-SKIP_TEST(demo, test1)
-// TEST(demo, test1)
-{
-    int *p = nullptr;
-    *p = 1;
-}
-
-TEST(demo, test2)
-{
-    ASSERT_EQ(1, 2);
-}
 ```
-
-### 输出结果
-
-[![p9yVUqx.png](https://s1.ax1x.com/2023/05/12/p9yVUqx.png)](https://imgse.com/i/p9yVUqx)
-
-### !注意
-
-```txt
-1. 使用多个JUST_RUN_TEST时会编译不通过, 会报: multiple definition of `g_justtest_Test'
+.
+├── alg
+│   ├── fft_cycle_check_test.cc
+│   ├── octree_test.cc
+│   └── quadtree_test.cc
+├── common
+│   ├── cast_test.cc
+│   ├── dbg_test.cc
+│   ├── demo_test.cc
+│   ├── log_test.cc
+│   └── read_file_test.cc
+├── language
+│   ├── attribute_test.cc
+│   └── initcall_test.cc
+├── matrix_ml
+│   ├── gmm
+│   │   └── gmm_test.cc
+│   └── hmm
+│       └── hmm_test.cc
+├── parallel
+│   ├── deprecated_test.cc
+│   └── omp_test.cc
+├── path_planning
+│   ├── a_star_test.cc
+│   └── b_spline_test.cc
+├── program_pattern
+│   ├── crtp.test.cc
+│   ├── ebco_test.cc
+│   ├── finae_test.cc
+│   ├── mixin_test.cc
+│   └── pimpl_test.cc
+├── project
+│   ├── asyncevent_test.cc
+│   ├── callback_test.cc
+│   ├── fsm1_test.cc
+│   ├── fsm_test.cc
+│   ├── producer_consumer_test.cc
+│   ├── singleton_test.cc
+│   ├── slide_window_test.cc
+│   ├── sync_action_impl_test.cc
+│   ├── threadsafe_queue_test.cc
+│   └── timer_test.cc
+├── simple_demo
+│   ├── print_test.cc
+│   └── string_test.cc
+└── viz
+    ├── cube_viz_test.cc
+    ├── pangolin_test.cc
+    ├── plot2d_test.cc
+    ├── plot_manage_test.cc
+    └── point_cloud_viz.cc
 ```
