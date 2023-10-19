@@ -12,7 +12,7 @@ using Point = Eigen::Vector2d;
 using Quad = QuadTree<Point, double>;
 
 
-JUST_RUN_TEST(quadtree, test)
+// JUST_RUN_TEST(quadtree, test)
 TEST(quadtree, test)
 {
     std::string data_path = "../src/data/quadtree.txt";

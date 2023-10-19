@@ -10,11 +10,7 @@ O & print_base(O &out, Args&&... args) {
     return out;
 } 
 
-std::string get_file_name(const std::string &file_name) {
-    size_t pos = file_name.find_last_of('/');
-    if (pos == std::string::npos) return file_name; 
-    return file_name.substr(pos + 1);
-}
+std::string get_file_name(const std::string &file_name);
 
 #define TT_PRINT_RED       "\033[31m"
 #define TT_PRINT_YELLOW    "\033[33m"
@@ -29,5 +25,7 @@ std::string get_file_name(const std::string &file_name) {
 
 #define LOG(...) print_base(std::cout, __VA_ARGS__, TT_PRINT_NONE) << std::endl
 #define LOG_FILE(out, ...) print_base(out, __VA_ARGS__) << std::endl
+
+#define LOG_TEST(...) print_base(std::cout, TT_PRINT_PURPLE, __VA_ARGS__, TT_PRINT_NONE) << std::endl
 
 #endif // __COMMON_LOG_H__
