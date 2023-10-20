@@ -9,7 +9,7 @@
 static void read_data(const std::string& p3d_path, const std::string& p2d_path,
                       std::vector<Eigen::Vector3d>& p3ds, std::vector<Eigen::Vector2d>& p2ds);
 
-JUST_RUN_TEST(ba_optimize, test)
+// JUST_RUN_TEST(ba_optimize, test)
 TEST(ba_optimize, test)
 {
     LOG_TEST("test");

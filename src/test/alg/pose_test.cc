@@ -15,7 +15,7 @@ Eigen::Quaterniond unit_random() {
     return Eigen::Quaterniond(a*sin(u2), a*cos(u2), b*sin(u3), b*cos(u3)).normalized();
 }
 
-// JUST_RUN_TEST(pose, base)
+JUST_RUN_TEST(pose, base)
 TEST(pose, base)
 {
     LOG_TEST("/*************** ch01_rot.cc ***************/");
