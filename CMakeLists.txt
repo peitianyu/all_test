@@ -33,6 +33,10 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 find_package(Pangolin REQUIRED)
 include_directories(${Pangolin_INCLUDE_DIRS})
 
+# 添加Sophus库
+find_package(Sophus REQUIRED)
+include_directories(${Sophus_INCLUDE_DIRS})
+
 # 添加.h文件
 include_directories(src)
 
@@ -40,4 +44,4 @@ file(GLOB_RECURSE ALL_LIBRIRY_SRCS "src/*.c*")
 
 # 执行文件
 add_executable(${PROJECT_NAME} ${ALL_LIBRIRY_SRCS})
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX  ${EIGEN3_LIBRARY} ${OpenCV_LIBS} ${PYTHON_LIBRARY} ${Pangolin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX  ${EIGEN3_LIBRARY} ${OpenCV_LIBS} ${PYTHON_LIBRARY} ${Pangolin_LIBRARIES} ${Sophus_LIBRARIES} fmt::fmt)

@@ -1,7 +1,9 @@
 #include "core/tt_test.h"
 #include "common/log.h"
-
+#include "core/tt_tictoc.h"
 #include "common/ba_optimize.h"
+
+#include <sophus/so3.hpp>
 
 
 static void read_data(const std::string& p3d_path, const std::string& p2d_path,
@@ -12,28 +14,23 @@ TEST(ba_optimize, test)
 {
     LOG_TEST("test");
 
-    Eigen::Matrix3d camera_info = Eigen::Matrix3d::Identity();
-
-    // double fx = 520.9, fy = 521.0, cx = 325.1, cy = 249.7;
-    camera_info << 520.9, 0, 325.1,
-                   0, 521.0, 249.7,
-                   0, 0, 1;
-
-    BA_Optimize ba_optimize(camera_info);
+    Eigen::Matrix<double, 4, 1> camera_info;
+    camera_info << 520.9, 521.0, 325.1, 249.7; // fx, fy, cx, cy
+    BA_Optimize ba_optimize({10, 1e-5, camera_info});
 
     std::vector<Eigen::Vector2d> p2ds;
     std::vector<Eigen::Vector3d> p3ds;
     std::vector<Eigen::Matrix4d> poses;
-    poses.push_back(Eigen::Matrix4d::Identity());
-
+    Eigen::Matrix4d pose = Eigen::Matrix4d::Identity();
 
     read_data("../src/data/p3d.txt", "../src/data/p2d.txt", p3ds, p2ds);
 
-    ba_optimize.optimize(p2ds, p3ds, poses);
+    TicToc tic_toc;
+    ba_optimize.optimize(p2ds, p3ds, pose);
+    LOG_TEST("BA optimization cost: ", tic_toc.Toc() * 1000, " ms");
 
-    LOG_TEST("pose: \n", poses[0]);
+    LOG_TEST("pose: \n", pose);
 }
-
 
 #include <fstream>
 static void read_data(const std::string& p3d_path, const std::string& p2d_path,
