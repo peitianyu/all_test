@@ -14,7 +14,7 @@ TEST(img2txt, test)
     cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
     resize(gray, gray, cv::Size(40, 20));
     std::cout << "/*****************************************************" << std::endl;
-    std::string ascii = " .*#8";
+    std::string ascii = " .*#B";
     for (int i = 0; i < gray.rows; i++)
     {
         for (int j = 0; j < gray.cols; j++){
