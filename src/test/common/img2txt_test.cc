@@ -6,7 +6,7 @@
 #include <opencv2/highgui/highgui.hpp>
 
 
-JUST_RUN_TEST(img2txt, test)
+// JUST_RUN_TEST(img2txt, test)
 TEST(img2txt, test)
 {
     cv::Mat img = cv::imread("../src/data/img.jpg");
