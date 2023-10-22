@@ -9,13 +9,9 @@ std::string get_file_name(const std::string &file_name) {
 #include <chrono>
 std::string get_curr_time()
 {
-    typedef std::chrono::system_clock Clock;
+    typedef std::chrono::high_resolution_clock Clock;
     typedef std::chrono::milliseconds milliseconds;
 
-    auto get_time = []()->double{
-        return std::chrono::duration_cast<milliseconds>(Clock::now().time_since_epoch()).count();
-    };
-
-    static double start = get_time();
-    return "["+std::to_string(get_time()-start)+"] ";
+    static auto start = Clock::now();
+    return "["+std::to_string(std::chrono::duration_cast<std::chrono::duration<double>>(Clock::now() - start).count())+"] ";
 }

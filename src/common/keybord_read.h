@@ -62,7 +62,7 @@ private:
                 if(ch == 'd') { curr_index_++; ch =' ';}
             }
             
-            if (ch == 'q') exit(0);
+            if (ch == 'q') break;
             else if (ch == '\n') curr_index_++;
             if(ch == 'x') { if(curr_index_ > 0) curr_index_--;}
 
