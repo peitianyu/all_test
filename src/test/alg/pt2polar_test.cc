@@ -32,7 +32,6 @@ TEST(pt2polar, test)
     cv::Mat img_l1 = cv::imread("../src/data/l1.png", cv::IMREAD_GRAYSCALE);
     cv::Mat img_r1 = cv::imread("../src/data/r1.png", cv::IMREAD_GRAYSCALE);
 
-    
     // 对极约束估计R, t
     cv::Mat R, t;
     std::vector<PairFeat> fts_l0l1 = stereo_detect(img_l0, img_l1);
@@ -65,8 +64,10 @@ void optimize(const std::vector<PairFeat>& pfs, const cv::Mat& R, const cv::Mat&
                      [0,       1]   [0,     1]
     0到1特征的变换矩阵为[R[01], t[01]]
 
-    r(θ, s) = 
-    ∂r/∂θ = 
+    r(α, β, γ, s) = 
+    ∂r/∂α = 
+    ∂r/∂β =
+    ∂r/∂γ =
     ∂r/∂s = 
     */ 
     // 1. 求解R[01], t[01]
@@ -88,21 +89,12 @@ void optimize(const std::vector<PairFeat>& pfs, const cv::Mat& R, const cv::Mat&
 
 float dist(const cv::Point2f& p0, const cv::Point2f& p1, const Eigen::Matrix4f& T)
 {
-    Eigen::Vector3f p0_3d(p0.x, p0.y, 1);
-    Eigen::Vector3f p1_3d(p1.x, p1.y, 1);
-    Eigen::Vector3f p0_3d_w = transform(T.block<3, 4>(0, 0), p0_3d);
-    Eigen::Vector3f p1_3d_w = transform(T.block<3, 4>(0, 0), p1_3d);
-
-    Eigen::Vector3f epipolar_line = p1_3d_w.cross(p0_3d_w);
-    float dist = epipolar_line.norm()/p0_3d_w.head<2>().norm();
-    return dist;
+    return 0.0;
 }
 
 Eigen::Vector3f transform(const Eigen::Matrix<float, 3, 4>& pose, const Eigen::Vector3f& point)
 {
-    // 旋转
     Eigen::Vector3f point_rot = pose.block<3, 3>(0, 0)*point;
-    // 平移
     return point_rot + pose.block<3, 1>(0, 3);
 }
 
