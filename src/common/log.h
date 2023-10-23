@@ -12,6 +12,8 @@ O & print_base(O &out, Args&&... args) {
 
 std::string get_file_name(const std::string &file_name);
 
+std::string get_curr_time();
+
 #define TT_PRINT_RED       "\033[31m"
 #define TT_PRINT_YELLOW    "\033[33m"
 #define TT_PRINT_GREEN     "\033[32m"
@@ -26,6 +28,6 @@ std::string get_file_name(const std::string &file_name);
 #define LOG(...) print_base(std::cout, __VA_ARGS__, TT_PRINT_NONE) << std::endl
 #define LOG_FILE(out, ...) print_base(out, __VA_ARGS__) << std::endl
 
-#define LOG_TEST(...) print_base(std::cout, TT_PRINT_PURPLE, __VA_ARGS__, TT_PRINT_NONE) << std::endl
+#define LOG_TEST(...) print_base(std::cout, TT_PRINT_PURPLE, get_curr_time(), __VA_ARGS__, TT_PRINT_NONE) << std::endl
 
 #endif // __COMMON_LOG_H__
