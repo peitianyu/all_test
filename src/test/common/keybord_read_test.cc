@@ -2,7 +2,7 @@
 #include "common/log.h"
 #include "common/keybord_read.h"
 
-JUST_RUN_TEST(keybord_read, test)
+// JUST_RUN_TEST(keybord_read, test)
 TEST(keybord_read, test)
 {
     std::vector<int> datas;
