@@ -37,7 +37,7 @@ TEST(pt2polar, test)
     std::vector<PairFeat> fts_l0l1 = stereo_detect(img_l0, img_l1);
     tracking(fts_l0l1, cam_info, R, t);
     // LOG_TEST("R: \n", R);
-    // LOG_TEST("t: ", t.t());
+    LOG_TEST("t: ", t.t());
 
     // img_l0 -> img_r1; img_l1 -> img_r0; img_r0 -> img_r1
     float scale = 1.0;
@@ -45,26 +45,37 @@ TEST(pt2polar, test)
     fts_l0r1 = stereo_detect(img_l0, img_r1);
     fts_r0l1 = stereo_detect(img_r0, img_l1);
     fts_r0r1 = stereo_detect(img_r0, img_r1);
-    optimize(fts_l0r1, R, t, bl, scale, ext_R);
-    optimize(fts_r0l1, R, t, bl, scale, ext_R);
-    optimize(fts_r0r1, R, t, bl, scale, ext_R);
+    // optimize(fts_l0r1, R, t, bl, scale, ext_R);
+    // optimize(fts_r0l1, R, t, bl, scale, ext_R);
+    // optimize(fts_r0r1, R, t, bl, scale, ext_R);
 
     // // 可视化
     // visualize(0, img_l0, fts_l0r1);
     // visualize(1, img_l1, fts_l1r0);
     // visualize(2, img_r0, fts_r0r1);
     // cv::waitKey(0);
+
+    // // 点到直线距离
+    // Eigen::Vector2f p0(0, 1);
+    // Eigen::Vector2f line1(1, 1);
+
+    // float dist = p0.dot(line1)/line1.norm();
+    // LOG_TEST("dist: ", dist);
 }
 float dist(const cv::Point2f& p0, const cv::Point2f& p1, const Eigen::Matrix4f& T);
 Eigen::Vector3f transform(const Eigen::Matrix<float, 3, 4>& pose, const Eigen::Vector3f& point);
 void optimize(const std::vector<PairFeat>& pfs, const cv::Mat& R, const cv::Mat& t, const float& bl, float& scale, Eigen::Matrix3f& ext_R) 
 {
     /*
-    (R[01], t[01]) = [R, scale*t] * [ext_R, b]
+    (R[01], t[01]) = [R, scale*t] * [ext_R, b]  =>   T01
                      [0,       1]   [0,     1]
     0到1特征的变换矩阵为[R[01], t[01]]
 
-    r(α, β, γ, s) = 
+    r(α, β, γ, s):
+        1. T01 -> pw1
+        2. pw1.normalize() -> p1' -> line1
+        3. dist = p0.dot(line1)/line1.norm();
+
     ∂r/∂α = 
     ∂r/∂β =
     ∂r/∂γ =
@@ -84,11 +95,22 @@ void optimize(const std::vector<PairFeat>& pfs, const cv::Mat& R, const cv::Mat&
 
     T = T*ext_T;
 
+    LOG_TEST("T: \n", T);
+    // T -> F 求基础矩阵
     
+    Eigen::Vector3f p0(pfs[0].first.x, pfs[0].first.y, 1);
+    Eigen::Vector3f p1(pfs[0].second.x, pfs[0].second.y, 1);
+    Eigen::Vector3f wp1 = transform(T.block<3, 4>(0, 0), p1);
+    Eigen::Vector2f line1 = wp1.head<2>()/wp1(2);
+
+    float dist = p0.head<2>().dot(line1)/line1.norm();
+
+    LOG_TEST("dist: ", dist);
 }
 
 float dist(const cv::Point2f& p0, const cv::Point2f& p1, const Eigen::Matrix4f& T)
 {
+
     return 0.0;
 }
 
