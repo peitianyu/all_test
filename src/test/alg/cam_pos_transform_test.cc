@@ -4,68 +4,54 @@
 #include <Eigen/Geometry>
 #include <Eigen/Core>
 
+Eigen::Matrix3f hat(const Eigen::Vector3f& v);
 
 // JUST_RUN_TEST(cam_pos, base)
 TEST(cam_pos, base)
 {
-    // float fx = 0.718856, fy = 0.718856, cx = 0.6071928, cy = 0.1852157, bl = 0.386145;
-    Eigen::Matrix3f K;
-    K << 0.718856, 0, 0.6071928,
-         0, 0.718856, 0.1852157,
-         0, 0, 1;
-    
-    Eigen::Matrix3f R;
-    R << 0.9999, 0.0106, -0.0095,
-         -0.0106, 0.9999, -0.0095,
-         0.0095, 0.0095, 0.9999;
-    Eigen::Vector3f t(0.0469029, 0.0283993, -0.858694);
-    float scale = 10.0;
+     Eigen::Matrix3f R;
+     R << 0.999989, -0.00277916, -0.00382672,
+         0.00277142, 0.999994, -0.00202726,
+         0.00383234, 0.00201664, 0.999991;
+     Eigen::Vector3f t(0.0190076, -0.0133997, 0.99973);
+     float scale = 0.68;
 
     Eigen::Vector3f ext_r = Eigen::Vector3f::Zero(); // alpha, beta, gamma
-    Eigen::Quaternionf ext_q(ext_r(0), ext_r(1), ext_r(2), 1);
+    Eigen::Quaternionf ext_q(1, ext_r(0), ext_r(1), ext_r(2));
     Eigen::Matrix3f ext_R = ext_q.toRotationMatrix();
     float baseline = 0.386145;
 
-    Eigen::Vector3f p0(50, 50, 1); // 齐次相机坐标系下的点(u, v, 1)
-
-    // (R[01], t[01]) = [R, scale*t] * [ext_R, b]  =>   T01
-    //                  [0,       1]   [0,     1]
-
-    // 求解T01
     Eigen::Matrix4f T01 = Eigen::Matrix4f::Identity();
-    T01 << R(0, 0), R(0, 1), R(0, 2), scale*t(0),
-           R(1, 0), R(1, 1), R(1, 2), scale*t(1),
-           R(2, 0), R(2, 1), R(2, 2), scale*t(2),
+    T01 << R(0, 0), R(0, 1), R(0, 2), t(0)*scale,
+           R(1, 0), R(1, 1), R(1, 2), t(1)*scale,
+           R(2, 0), R(2, 1), R(2, 2), t(2)*scale,
            0, 0, 0, 1;
+
+    Eigen::Matrix3f K;
+    K << 718.856, 0, 607.1928,
+         0, 718.856, 185.2157,
+         0, 0, 1;
 
     Eigen::Matrix4f ext_T = Eigen::Matrix4f::Identity();
     ext_T.block<3, 3>(0, 0) = ext_R;
-    ext_T(0, 3) = baseline;
-
+    ext_T.block<3, 1>(0, 3) = Eigen::Vector3f::Ones() * baseline;
     T01 = T01 * ext_T;
-    LOG_TEST("T01: \n", T01);
 
-    // 求解本质矩阵
-    // 反对称矩阵
+    Eigen::Vector3f p0(612, 171, 1); // 齐次相机坐标系下的点(u, v, 1), 左相机点
+    Eigen::Vector3f p1(614.431, 172.358, 1);
     Eigen::Vector3f t1 = T01.block<3, 1>(0, 3);
-    Eigen::Matrix3f t_hat;
-    t_hat << 0, -t1(2), t1(1),
-             t1(2), 0, -t1(0),
-             -t1(1), t1(0), 0;
-    
-    Eigen::Matrix3f E = t_hat * R;
-    LOG_TEST("E: \n", E);
+    Eigen::Matrix3f E = hat(t1) * T01.block<3, 3>(0, 0);
+    Eigen::Vector3f x0 = K.inverse() * p0;
+    Eigen::Vector3f x1 = K.inverse() * p1;
 
-    // 求极线
-    Eigen::Vector3f line = E * p0;
-    LOG_TEST("line: ", line.transpose());
+    LOG_TEST("xo^T * E * x1: ", x0.transpose() * E * x1);
+}
 
-    // 求点到直线距离
-    Eigen::Vector3f p1(50, 50, 1);
-    float d = std::abs(p1.dot(line) / line.norm());
-    LOG_TEST("d: ", d);
-
-    // d 为残差, ext_r(α, β, γ)与scale为待优化变量, 构造雅各比
-    Eigen::Matrix<float, 1, 4> J;
-     
+Eigen::Matrix3f hat(const Eigen::Vector3f& v)
+{
+    Eigen::Matrix3f hat_v;
+    hat_v << 0, -v(2), v(1),
+             v(2), 0, -v(0),
+             -v(1), v(0), 0;
+    return hat_v;
 }

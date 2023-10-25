@@ -10,11 +10,12 @@ class Pt2PolarVariable : public Variable
 public:
     Pt2PolarVariable(const Eigen::Vector4d& x) : x_(x) {}
 
-    Eigen::Vector3d rot() const { return x_.head<3>(); }
-
     Eigen::Matrix3d ext_R() const {
-        return Eigen::Quaterniond(x_(0), x_(1), x_(2), 1).toRotationMatrix();
+        Eigen::Quaterniond q(1, x_(0), x_(1), x_(2));
+        return q.normalized().toRotationMatrix();
     }
+
+    Eigen::Vector4d x() const { return x_; }
 
     double scale() const { return x_(3); }
 
@@ -30,8 +31,9 @@ private:
 class Pt2PolarFactor : public Factor
 {
 public:
-    Pt2PolarFactor(Pt2PolarVariable *v_a, const Eigen::Matrix4d& T, const double& baseline, const Eigen::Vector3d& p0, const Eigen::Vector3d& p1) 
-        : T_(T), baseline_(baseline), p0_(p0), p1_(p1) { AddVariable(v_a);}
+    Pt2PolarFactor(Pt2PolarVariable *v_a, const Eigen::Matrix4d& T, const double& baseline, const Eigen::Matrix3d& K,
+        const Eigen::Vector3d& p0, const Eigen::Vector3d& p1, const uint& mode = 0) 
+        : T_(T), baseline_(baseline), K_inv_(K.inverse()), p0_(p0), p1_(p1), mode_(mode) { AddVariable(v_a);}
 
     virtual int Dim() const override { return 1;}
 
@@ -48,17 +50,22 @@ public:
         
         Eigen::Matrix4d ext_T = Eigen::Matrix4d::Identity();
         ext_T.block<3, 3>(0, 0) = v_a->ext_R();
-        ext_T(0, 3) = baseline_;
+        if(mode_ == 0)
+            ext_T(0, 3) = baseline_;
+        else if(mode_ == 1)
+            ext_T(0, 3) = -baseline_;
+        else if(mode_ == 2)
+            ext_T(1, 3) = 0;
 
         T01 = T01 * ext_T;
 
         Eigen::Matrix3d E = hat(T01.block<3, 1>(0, 3)) * T01.block<3, 3>(0, 0);
 
-        Eigen::Vector3d line = E * p0_;
+        Eigen::Vector3d x0 = K_inv_ * p0_;
+        Eigen::Vector3d x1 = K_inv_ * p1_;
 
         Eigen::VectorXd r(1);
-        r << std::abs(p1_.dot(line) / line.norm());
-
+        r <<  x0.transpose() * E * x1;
         return r;
     }
 
@@ -73,8 +80,10 @@ public:
 private:
     Eigen::Matrix4d T_;
     double baseline_;
+    Eigen::Matrix3d K_inv_;
     Eigen::Vector3d p0_;
     Eigen::Vector3d p1_;
+    uint mode_;
 };
 
 
