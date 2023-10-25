@@ -18,7 +18,7 @@ std::vector<PairFeat> fts_l0r1;
 std::vector<PairFeat> fts_r0l1;
 std::vector<PairFeat> fts_r0r1;
 
-JUST_RUN_TEST(pt2polar, test)
+// JUST_RUN_TEST(pt2polar, test)
 TEST(pt2polar, test)
 {
     float fx = 0.718856, fy = 0.718856, cx = 0.6071928, cy = 0.1852157, bl = 0.386145;

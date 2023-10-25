@@ -10,7 +10,6 @@ std::string get_file_name(const std::string &file_name) {
 std::string get_curr_time()
 {
     typedef std::chrono::high_resolution_clock Clock;
-    typedef std::chrono::milliseconds milliseconds;
 
     static auto start = Clock::now();
     return "["+std::to_string(std::chrono::duration_cast<std::chrono::duration<double>>(Clock::now() - start).count())+"] ";

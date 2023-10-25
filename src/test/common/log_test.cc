@@ -6,6 +6,12 @@
 // JUST_RUN_TEST(log, test)
 TEST(log, test)
 {
+    LOG_TEST("log", "test");
+}
+
+// JUST_RUN_TEST(log1, test)
+TEST(log1, test)
+{
     LOG(TT_PRINT_RED, "[ERROR]", CODE_INFO, "hello world");
 
     std::string log_path = "log.txt";
