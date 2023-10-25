@@ -9,7 +9,7 @@ static void random_point_cloud(std::vector<Eigen::Vector3d>& points, int num);
 std::vector<Eigen::Vector3d> update_point_cloud(const std::vector<Eigen::Vector3d>& points, const Eigen::Matrix4d& pose);
 void pose_estimation_3d3d(const std::vector<Eigen::Vector3d>& pts1, const std::vector<Eigen::Vector3d>& pts2, Eigen::Matrix4d& pose);
 
-JUST_RUN_TEST(icp, base)
+// JUST_RUN_TEST(icp, base)
 TEST(icp, base)
 {
     std::vector<Eigen::Vector3d> ref_pts, cur_pts;

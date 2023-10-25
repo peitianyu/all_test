@@ -11,10 +11,22 @@ SET(CMAKE_CXX_COMPILER "g++")
 # 执行路径设置
 # SET(EXECUTABLE_OUTPUT_PATH ../bin)
 # 设置编译选项
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O0 -Wall -std=c++14 -fPIC -pthread")
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -std=c++14 -fPIC -pthread")
+SET(CMAKE_BUILD_TYPE Release)
 # 运行测试
 add_definitions(-DTEST_ENABLE)
+
+# 开启图优化打印与断言
+option(ENABLE_LOGGING "Enable logging." ON )
+if(ENABLE_LOGGING)
+add_definitions(-DGRAPH_ENABLE_LOG)
+endif()
+
+option(ENABLE_ASSERTIONS "Enable assertions." ON )
+if(ENABLE_ASSERTIONS)
+add_definitions(-DGRAPH_ENABLE_ASSERT)
+endif()
+
 
 # 添加eigen库
 find_package(Eigen3 REQUIRED)
@@ -33,6 +45,9 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 find_package(Pangolin REQUIRED)
 include_directories(${Pangolin_INCLUDE_DIRS})
 
+find_package(Ceres REQUIRED)
+include_directories(${CERES_INCLUDE_DIRS})
+
 # 添加Sophus库
 find_package(Sophus REQUIRED)
 include_directories(${Sophus_INCLUDE_DIRS})
@@ -44,4 +59,5 @@ file(GLOB_RECURSE ALL_LIBRIRY_SRCS "src/*.c*")
 
 # 执行文件
 add_executable(${PROJECT_NAME} ${ALL_LIBRIRY_SRCS})
-target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX  ${EIGEN3_LIBRARY} ${OpenCV_LIBS} ${PYTHON_LIBRARY} ${Pangolin_LIBRARIES} ${Sophus_LIBRARIES} fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenMP::OpenMP_CXX  ${EIGEN3_LIBRARY} ${OpenCV_LIBS} 
+                        ${PYTHON_LIBRARY} ${Pangolin_LIBRARIES} ${Sophus_LIBRARIES} fmt::fmt ${CERES_LIBRARIES})
