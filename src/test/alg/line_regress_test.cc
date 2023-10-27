@@ -23,7 +23,7 @@ public:
 };
 
 
-JUST_RUN_TEST(line_regress, test)
+// JUST_RUN_TEST(line_regress, test)
 TEST(line_regress, test)
 {
     std::vector<double> xs, ys;

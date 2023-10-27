@@ -78,7 +78,7 @@ Pos pos_inverse(const Euler& euler, const Param& param)
 
 
 
-JUST_RUN_TEST(kinematics_solutions, test)
+// JUST_RUN_TEST(kinematics_solutions, test)
 TEST(kinematics_solutions, test)
 {
     // LOG_TEST("kinematics_solutions", "test");
