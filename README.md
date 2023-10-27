@@ -6,15 +6,12 @@
 │   └── ceres_demo.cc
 ├── alg
 │   ├── ba_optimize_test.cc
-│   ├── cam_pos_transform_test.cc
 │   ├── fft_cycle_check_test.cc
 │   ├── icp_test.cc
 │   ├── line_regress_test.cc
 │   ├── octree_test.cc
+│   ├── pin_up_picture_test.cc
 │   ├── pose_test.cc
-│   ├── pt2polar_test
-│   │   ├── pt2polar_factor.h
-│   │   └── pt2polar_test.cc
 │   └── quadtree_test.cc
 ├── common
 │   ├── cast_test.cc
@@ -67,5 +64,5 @@
     ├── plot_manage_test.cc
     └── point_cloud_viz.cc
 
-15 directories, 49 files
+14 directories, 47 files
 ```
