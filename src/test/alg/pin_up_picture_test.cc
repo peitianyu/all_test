@@ -60,6 +60,8 @@ public:
         }
         cv::imshow("img", img);
         cv::waitKey(1);
+        // 将img保存到本地
+        cv::imwrite("img.jpg", img);
     }
 private:
     Eigen::MatrixXf sub(const PinUpPicture& other) 
