@@ -26,7 +26,7 @@ public:
         return m_trj;
     }
 
-    void find_best_id(const PinUpPicture& other)
+    bool find_best_id(const PinUpPicture& other)
     {
         Eigen::MatrixXf diff_map = sub(other);
         Eigen::Vector2i xy = id2xy(m_trj.back());
@@ -45,11 +45,11 @@ public:
 
         if(best_id == m_trj.back() || best_cnt < 20){
             std::cout << "best_id == m_trj.back()" << std::endl;
-            return;
+            return false;
         }
 
         m_trj.push_back(best_id);
-        brasenham(diff_map, xy(0), xy(1), id2xy(best_id)(0), id2xy(best_id)(1), 0.2);
+        brasenham(diff_map, xy(0), xy(1), id2xy(best_id)(0), id2xy(best_id)(1), 0.1);
 
         cv::Mat img(m_size, m_size, CV_8UC1);
         for (uint i = 0; i < m_size; i++) {
@@ -60,8 +60,8 @@ public:
         }
         cv::imshow("img", img);
         cv::waitKey(1);
-        // 将img保存到本地
-        cv::imwrite("img.jpg", img);
+
+        return true;
     }
 private:
     Eigen::MatrixXf sub(const PinUpPicture& other) 
@@ -140,13 +140,11 @@ TEST(pin_up_picture, test)
     PinUpPicture blank(100, 500, 500);
 
     while(true){
-        blank.find_best_id(pup);
+        bool find = blank.find_best_id(pup);
+        if(!find) break;
     }
 
+    cv::waitKey(0);
+
     std::cout << "trj: " << blank.get_trj().size() << std::endl;
-
-    // 假设以100, 100为中心点, 构建一个半径为100的圆绘制钉画
-
-    // cv::imshow("gray", gray);
-    // cv::waitKey(0);
 }
