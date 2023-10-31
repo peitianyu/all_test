@@ -127,7 +127,7 @@ private:
 };
 
 
-JUST_RUN_TEST(pin_up_picture, test)
+// JUST_RUN_TEST(pin_up_picture, test)
 TEST(pin_up_picture, test)
 {
     cv::Mat img = cv::imread("../src/data/img.jpg");
