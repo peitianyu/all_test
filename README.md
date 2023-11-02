@@ -6,6 +6,8 @@
 │   └── ceres_demo.cc
 ├── alg
 │   ├── ba_optimize_test.cc
+│   ├── bilinear_interpolation_test.cc
+│   ├── direct_method_test.cc
 │   ├── fft_cycle_check_test.cc
 │   ├── icp_test.cc
 │   ├── line_regress_test.cc
@@ -65,5 +67,5 @@
     ├── plot_manage_test.cc
     └── point_cloud_viz.cc
 
-14 directories, 48 files
+14 directories, 50 files
 ```

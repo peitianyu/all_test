@@ -20,7 +20,7 @@ double solve_distance(const Eigen::Vector3d& p, const Eigen::Vector4d& n)
 
 std::vector<Eigen::Vector3d> read_data(const std::string& path);
 
-JUST_RUN_TEST(ransac, test)
+// JUST_RUN_TEST(ransac, test)
 TEST(ransac, test)
 {
     std::vector<Eigen::Vector3d> pts = read_data("../src/data/pcltest.csv");
