@@ -13,6 +13,10 @@ public:
     Pose3d(const Eigen::Matrix3d &R, const Eigen::Vector3d &t) : q_(R), t_(t) {}
     Pose3d(const Pose3d &other) : q_(other.q_), t_(other.t_) {}
 
+    Pose3d operator*(const double& s) const {
+        return Pose3d(q_.slerp(s, Eigen::Quaterniond::Identity()), t_ * s);
+    }
+
     Eigen::Quaterniond & q() { return q_; }
     Eigen::Vector3d & t() { return t_; }
     const Eigen::Quaterniond & q() const { return q_; }
@@ -25,7 +29,11 @@ public:
     Point3d trans_from(const Point3d& p) const { return q_.toRotationMatrix().transpose() * (p - t_); }
 
     friend std::ostream & operator << (std::ostream &out, const Pose3d &pose) {
-        out << "q: \n" << pose.q_.normalized().coeffs().transpose() << " \nt: \n" << pose.t_.transpose();
+        // out << "q: " << pose.q_.normalized().coeffs().transpose() << " t: " << pose.t_.transpose();
+        // return out;
+        // 欧拉角显示
+        Eigen::Vector3d euler_angles = pose.q_.normalized().toRotationMatrix().eulerAngles(2, 1, 0);
+        out << "r: " << euler_angles.transpose() << " t: " << pose.t_.transpose();
         return out;
     }
 

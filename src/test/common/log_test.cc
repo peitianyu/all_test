@@ -1,13 +1,14 @@
 #include "core/tt_test.h"
 #include "common/log.h"
 #include <iostream>
-#include <fstream>
 
 // JUST_RUN_TEST(log, test)
 TEST(log, test)
 {
-    LOG_TEST("log", "test");
+    LOG_TEST("------------------------------log--------------------------");
 }
+
+#include <fstream>
 
 // JUST_RUN_TEST(log1, test)
 TEST(log1, test)

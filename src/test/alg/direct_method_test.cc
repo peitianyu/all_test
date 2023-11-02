@@ -91,7 +91,7 @@ private:
 };
 
 
-JUST_RUN_TEST(direct_method, test)
+// JUST_RUN_TEST(direct_method, test)
 TEST(direct_method, test)
 {
     LOG_TEST("------------------------------------direct method test-------------------------------------");
@@ -104,6 +104,6 @@ TEST(direct_method, test)
          0, 718.856, 185.2157,
          0, 0, 1;
     
-    Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
+    // Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
 
 }
