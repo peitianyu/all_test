@@ -37,7 +37,7 @@ template<typename LinearRegressionFactorType>
 class LinearRegressionOptimize 
 {
 public:
-    LinearRegressionOptimize() {}
+    LinearRegressionOptimize() = default;
 
     void Optimize(const Eigen::VectorXd& X, const Eigen::MatrixXd& measurement)
     {
@@ -59,7 +59,7 @@ public:
     Eigen::VectorXd X() const { return X_; }
 
     void Print() const { std::cout << "X: " << X_.transpose() << std::endl; }
-private:
+protected:
     Eigen::VectorXd X_;
 };
 

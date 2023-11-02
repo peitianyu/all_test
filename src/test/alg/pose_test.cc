@@ -41,7 +41,7 @@ TEST(pose, base)
     LOG_TEST("SO3_R:\n", SO3_R);
 }
 
-JUST_RUN_TEST(ch01, pose3d)
+// JUST_RUN_TEST(ch01, pose3d)
 TEST(ch01, pose3d)
 {
     LOG_TEST("/*************** ch01_pose ***************/");
