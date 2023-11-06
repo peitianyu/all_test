@@ -29,18 +29,10 @@ public:
     Point3d trans_from(const Point3d& p) const { return q_.toRotationMatrix().transpose() * (p - t_); }
 
     friend std::ostream & operator << (std::ostream &out, const Pose3d &pose) {
-        // out << "q: " << pose.q_.normalized().coeffs().transpose() << " t: " << pose.t_.transpose();
-        // return out;
-        // 欧拉角显示
         Eigen::Vector3d euler_angles = pose.q_.normalized().toRotationMatrix().eulerAngles(2, 1, 0);
         out << "r: " << euler_angles.transpose() << " t: " << pose.t_.transpose();
         return out;
     }
-
-    // friend std::ostream & operator << (std::ostream &out, const Pose3d &pose) {
-    //     out << "q: \n" << pose.q_.toRotationMatrix() << " \nt: \n" << pose.t_.transpose();
-    //     return out;
-    // }
 private:
     Eigen::Quaterniond q_;
     Eigen::Vector3d t_;
