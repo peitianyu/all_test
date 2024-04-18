@@ -112,5 +112,5 @@ TEST(octree, test)
     std::cout << "find node: " << node->center.transpose() << " data: " << node->data << " depth: " << node->depth << std::endl;
 
     ///////////////////////visual//////////////////////////
-    // visual_octree(octree);
+    visual_octree(octree);
 }

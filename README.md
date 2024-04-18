@@ -7,9 +7,10 @@
 ├── alg
 │   ├── ba_optimize_test.cc
 │   ├── bilinear_interpolation_test.cc
-│   ├── direct_method_test.cc
+│   ├── code_optimize_test.cc
 │   ├── fft_cycle_check_test.cc
 │   ├── icp_test.cc
+│   ├── image_pyramid_test.cc
 │   ├── line_regress_test.cc
 │   ├── octree_test.cc
 │   ├── pin_up_picture_test.cc
@@ -48,6 +49,7 @@
 │   └── pimpl_test.cc
 ├── project
 │   ├── asyncevent_test.cc
+│   ├── behavior_tree_test.cc
 │   ├── callback_test.cc
 │   ├── fsm1_test.cc
 │   ├── fsm_test.cc
@@ -67,5 +69,5 @@
     ├── plot_manage_test.cc
     └── point_cloud_viz.cc
 
-14 directories, 50 files
+14 directories, 52 files
 ```
