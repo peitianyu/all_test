@@ -123,7 +123,11 @@ protected:
 
     BehaviorTreeStatus get_status() { return m_status; }
 
-    std::pair<std::string, std::string> get_data(const std::string& name) { if(m_data.find(name) != m_data.end()) return m_data[name]; else return std::make_pair("", ""); }
+    std::pair<std::string, std::string> get_data(const std::string& name) 
+    { 
+        if(m_data.find(name) != m_data.end())   return m_data[name]; 
+        else                                    return std::make_pair("", ""); 
+    }
 
     void set_status(const BehaviorTreeStatus& status) { m_status = status; }
 protected:

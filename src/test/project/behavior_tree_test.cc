@@ -43,7 +43,7 @@ protected:
     int m_cnt;
 };
 
-JUST_RUN_TEST(behavior_tree, test)
+// JUST_RUN_TEST(behavior_tree, test)
 TEST(behavior_tree, test)
 {
     LOG_TEST("----------------------------behavior_tree--------------------------");

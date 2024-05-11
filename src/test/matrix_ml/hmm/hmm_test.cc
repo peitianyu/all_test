@@ -327,9 +327,9 @@ TEST(recognition, test)
         hmm_print(h[train_ix]);
     }
     printf("Recognizing sequences...\n");
-    unsigned int test_ix;
+    unsigned int test_ix = 0;
     for (test_ix=0; test_ix<ntest; ++test_ix) {
-        unsigned int best_ix;
+        unsigned int best_ix = 0;
         double best_LL = -HUGE_VAL;
         for (ix=0; ix<ntrain; ++ix) {
             const double LL = compute_LL(h[ix], T, O[test_ix]);

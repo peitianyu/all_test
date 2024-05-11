@@ -69,7 +69,7 @@ TEST(asyncevent, test)
     while(1)
     {
         //4.根据自己时机去触发信号
-        scanf("%c", &c);
+        if(scanf("%c", &c) != 1) continue;
         switch (c)
         {
         case 'a':
