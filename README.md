@@ -1,6 +1,6 @@
 # 日常测试练习
 
-```
+```shell
 .
 ├── 3dr
 │   └── ceres_demo.cc
@@ -51,6 +51,7 @@
 │   ├── asyncevent_test.cc
 │   ├── behavior_tree_test.cc
 │   ├── callback_test.cc
+│   ├── event_loop_test.cc
 │   ├── fsm1_test.cc
 │   ├── fsm_test.cc
 │   ├── producer_consumer_test.cc
@@ -69,5 +70,5 @@
     ├── plot_manage_test.cc
     └── point_cloud_viz.cc
 
-14 directories, 52 files
+14 directories, 53 files
 ```
