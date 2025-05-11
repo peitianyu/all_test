@@ -12,8 +12,7 @@ public:
     EventManager* eventRegist(std::string event_name, void (*callback)(int)) {
         std::vector<void (*)(int)>* listeners = &events[event_name];
         // if this listener is already registered, we wont add it again
-        if (std::find(listeners->begin(), listeners->end(), callback) !=  listeners->end()) 
-        {
+        if (std::find(listeners->begin(), listeners->end(), callback) !=  listeners->end()) {
             return this;
         }
         listeners->push_back(callback);
@@ -37,7 +36,7 @@ static void callback2(int num) {
 }
 
 #include "core/tt_test.h"
-JUST_RUN_TEST(event_loop, test)
+// JUST_RUN_TEST(event_loop, test)
 TEST(event_loop, test)
 {
     EventManager* event_manager = new EventManager();

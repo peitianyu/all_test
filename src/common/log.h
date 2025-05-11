@@ -28,6 +28,6 @@ std::string get_curr_time();
 #define LOG(...) print_base(std::cout, __VA_ARGS__, TT_PRINT_NONE) << std::endl
 #define LOG_FILE(out, ...) print_base(out, __VA_ARGS__) << std::endl
 
-#define LOG_TEST(...) print_base(std::cout, TT_PRINT_PURPLE, get_curr_time(), "(", __LINE__, "): ",  __VA_ARGS__, TT_PRINT_NONE) << std::endl
+#define LOG_TEST(...) print_base(std::cout, TT_PRINT_PURPLE, get_curr_time(), "[", __FILE__, "] (", __LINE__, "): ",  __VA_ARGS__, TT_PRINT_NONE) << std::endl
 
 #endif // __COMMON_LOG_H__

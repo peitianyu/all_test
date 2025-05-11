@@ -9,8 +9,8 @@ if [ ! -d "build" ]; then
 fi
 
 
-# cd build && cmake -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 .. && make -j6
-cd build && cmake -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -G Ninja .. && ninja
+cd build && cmake -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 .. && make -j6
+# cd build && cmake -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -G Ninja .. && ninja
 
 ./all_tests
 

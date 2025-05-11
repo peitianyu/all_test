@@ -25,6 +25,7 @@ struct Tester
 #define ASSERT_LE(a, b) Tester(__FILE__, __LINE__).Is((a) <= (b), #a " <= " #b)
 #define ASSERT_GT(a, b) Tester(__FILE__, __LINE__).Is((a) > (b), #a " > " #b)
 #define ASSERT_GE(a, b) Tester(__FILE__, __LINE__).Is((a) >= (b), #a " >= " #b)
+#define ASSERT_NEAR(a, b, c) Tester(__FILE__, __LINE__).Is(std::abs((a) - (b)) < (c), #a " ~= " #b)
 
 
 #define EXPECT_TRUE(x) Tester(__FILE__, __LINE__).Is((x), #x)
@@ -35,6 +36,7 @@ struct Tester
 #define EXPECT_LE(a, b) Tester(__FILE__, __LINE__).Is((a) <= (b), #a " <= " #b)
 #define EXPECT_GT(a, b) Tester(__FILE__, __LINE__).Is((a) > (b), #a " > " #b)
 #define EXPECT_GE(a, b) Tester(__FILE__, __LINE__).Is((a) >= (b), #a " >= " #b)
+#define EXPECT_NEAR(a, b, c) Tester(__FILE__, __LINE__).Is(std::abs((a) - (b)) < (c), #a " ~= " #b)
 
 
 class RegisterTest
